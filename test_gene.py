@@ -16,3 +16,11 @@ def test_gene_equality_2():
         GeneAlleleType('a', 'big nose', 'small nose')
         != GeneAlleleType('a', 'has horns', 'no horns')
     )
+
+
+def test_different_identifiers_to_be_different():
+    assert GeneAlleleType('b', '', '') != GeneAlleleType('c', '', '')
+
+
+def test_different_case_identifier_to_be_same():
+    assert GeneAlleleType('a', '', '') == GeneAlleleType('A', '', '')
