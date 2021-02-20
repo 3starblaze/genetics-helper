@@ -36,3 +36,26 @@ class GeneAlleleType:
             and self.recessive_property == other.recessive_property
             and self.codominant_property == other.codominant_property
         )
+
+
+class GeneAllele:
+    def __init__(
+            self,
+            value: str,
+            dominant_property: str,
+            recessive_property: str,
+            codominant_property: Optional[str] = None
+    ):
+        self.gene_allele_type = GeneAlleleType(
+            value, dominant_property, recessive_property, codominant_property
+        )
+        self.is_dominant = value == value.upper()
+
+
+    def __eq__(self, other):
+        if not isinstance(other, GeneAllele):
+            return NotImplemented
+        return (
+            self.gene_allele_type == other.gene_allele_type
+            and self.is_dominant == other.is_dominant
+        )
