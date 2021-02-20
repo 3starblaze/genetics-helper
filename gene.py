@@ -83,5 +83,21 @@ class Genotype:
             and self.gene_allele_b == other.gene_allele_b
         )
 
+
     def __str__(self):
         return self.gene_allele_a.value + self.gene_allele_b.value
+
+
+def breed (genotype_a: Genotype, genotype_b: Genotype):
+    if (
+        not isinstance(genotype_a, Genotype)
+        or not isinstance(genotype_a, Genotype)
+    ):
+        raise ValueError("Arguments must be objects of class Genotype!")
+
+    results = []
+    for allele_a in [genotype_a.gene_allele_a, genotype_a.gene_allele_b]:
+        for allele_b in [genotype_b.gene_allele_a, genotype_b.gene_allele_b]:
+            results.append(Genotype(allele_a, allele_b))
+
+    return results
