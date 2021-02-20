@@ -11,7 +11,7 @@ def legal_gene_identifier(gene):
     )
 
 
-class Gene:
+class GeneAlleleType:
     def __init__(
             self,
             identifier: str,
@@ -21,14 +21,14 @@ class Gene:
     ):
         if not legal_gene_identifier(identifier):
             raise "Not a legal identifier"
-        self.identifier = identifier
+        self.identifier = identifier.upper()
         self.dominant_property = dominant_property
         self.recessive_property = recessive_property
         self.codominant_property = codominant_property
 
 
     def __eq__(self, other):
-        if not isinstance(other, Gene):
+        if not isinstance(other, GeneAlleleType):
             return NotImplemented
         return (
             self.identifier == other.identifier
