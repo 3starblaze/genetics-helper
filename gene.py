@@ -59,3 +59,25 @@ class GeneAllele:
             self.gene_allele_type == other.gene_allele_type
             and self.is_dominant == other.is_dominant
         )
+
+
+class Genotype:
+    def __init__(self, gene_allele_a: GeneAllele, gene_allele_b: GeneAllele):
+        if (
+            not isinstance(gene_allele_a, GeneAllele)
+            or not isinstance(gene_allele_b, GeneAllele)
+        ):
+            raise ValueError('Arguments must be objects of GeneAllele class!')
+
+        if gene_allele_a.gene_allele_type != gene_allele_b.gene_allele_type:
+            raise ValueError('Gene alleles must have same type!')
+
+        self.gene_allele_a = gene_allele_a
+        self.gene_allele_b = gene_allele_b
+
+
+    def __eq__(self, other):
+        return (
+            self.gene_allele_a == other.gene_allele_a
+            and self.gene_allele_b == other.gene_allele_b
+        )
