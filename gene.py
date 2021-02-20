@@ -46,6 +46,7 @@ class GeneAllele:
             recessive_property: str,
             codominant_property: Optional[str] = None
     ):
+        self.value = value
         self.gene_allele_type = GeneAlleleType(
             value, dominant_property, recessive_property, codominant_property
         )
@@ -81,3 +82,6 @@ class Genotype:
             self.gene_allele_a == other.gene_allele_a
             and self.gene_allele_b == other.gene_allele_b
         )
+
+    def __str__(self):
+        return self.gene_allele_a.value + self.gene_allele_b.value

@@ -30,3 +30,10 @@ def test_incorrect_non_gene_allele_arguments():
     b = 42
     with pytest.raises(ValueError):
         Genotype(a, b)
+
+
+def test_to_str():
+    a = GeneAllele('C', '', '')
+    b = GeneAllele('c', '', '')
+    g = Genotype(a, b)
+    assert str(g) == 'Cc'
