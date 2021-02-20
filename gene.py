@@ -3,9 +3,9 @@
 from typing import Optional
 
 
-def legal_gene_identifier(gene):
+def is_legal_gene_allele(gene):
     return (
-        type(gene is str)
+        type(gene) is str
         and len(gene) == 1
         and gene.lower() != gene.upper() # Check gene can be capitalized
     )
@@ -19,7 +19,7 @@ class GeneAlleleType:
             recessive_property: str,
             codominant_property: Optional[str] = None
     ):
-        if not legal_gene_identifier(identifier):
+        if not is_legal_gene_allele(identifier):
             raise "Not a legal identifier"
         self.identifier = identifier.upper()
         self.dominant_property = dominant_property
