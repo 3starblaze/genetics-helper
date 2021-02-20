@@ -31,8 +31,8 @@ class Gene:
         if not isinstance(other, Gene):
             return NotImplemented
         return (
-            self.identifier == other.identifier,
-            self.dominant_property == other.dominant_property,
-            self.recessive_property == other.recessive_property,
-            self.codominant_property == other.codominant_property,
+            self.identifier == other.identifier
+            and self.dominant_property == other.dominant_property
+            and self.recessive_property == other.recessive_property
+            and self.codominant_property == other.codominant_property
         )
