@@ -22,6 +22,10 @@ class GeneAllele:
         return self.value == other.value
 
 
+def is_same_gene_allele_type(gene_a: GeneAllele, gene_b: GeneAllele):
+    return gene_a.value.lower() == gene_b.value.lower()
+
+
 class Genotype:
     def __init__(self, gene_allele_a: GeneAllele, gene_allele_b: GeneAllele):
         if (
@@ -29,6 +33,9 @@ class Genotype:
             or not isinstance(gene_allele_b, GeneAllele)
         ):
             raise ValueError('Arguments must be objects of GeneAllele class!')
+
+        if not is_same_gene_allele_type(gene_allele_a, gene_allele_b):
+            raise ValueError('Gene alleles must be of same type!')
 
         self.gene_allele_a = gene_allele_a
         self.gene_allele_b = gene_allele_b
