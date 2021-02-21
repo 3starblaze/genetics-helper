@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
-from typing import Optional
+from typing import Optional, Sequence
+from functools import reduce
 
 
 def is_legal_gene_allele(gene):
@@ -50,6 +51,17 @@ class Genotype:
 
     def __str__(self):
         return self.gene_allele_a.value + self.gene_allele_b.value
+
+
+class MultiGenotype:
+    def __init__(self, *genotypes: Sequence[Genotype]):
+        for genotype in genotypes:
+            if not isinstance(genotype, Genotype):
+                raise ValueError(f"{ genotype } is not an instance of Genotype!")
+        self.genotypes = genotypes
+
+    def __str__(self):
+        return reduce(lambda g1, g2: str(g1) + str(g2), self.genotypes)
 
 
 def breed (genotype_a: Genotype, genotype_b: Genotype):
