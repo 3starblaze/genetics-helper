@@ -26,6 +26,11 @@ def test_equality_2():
     assert MultiGenotype(G('bb'), G('cc')) != MultiGenotype(G('BB'), G('CC'))
 
 
+def test_no_duplicate_genotype_classes():
+    with pytest.raises(ValueError):
+        MultiGenotype(G('Zz'), G('ZZ'))
+
+
 def test_2_genotype_breeding_1():
     mg1 = MultiGenotype(G('Aa'), G('Bb'))
     mg2 = MultiGenotype(G('Aa'), G('Bb'))

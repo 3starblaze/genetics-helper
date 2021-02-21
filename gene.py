@@ -73,6 +73,14 @@ class MultiGenotype:
         for genotype in genotypes:
             if not isinstance(genotype, Genotype):
                 raise ValueError(f"{ genotype } is not an instance of Genotype!")
+
+        # Genotype classes are obtained by forcing the same case
+        genotype_classes = [str(g).lower() for g in genotypes]
+        # set() never contains duplicates, if the new set has different length than
+        # list, that means the list contains duplicates
+        if len(genotype_classes) != len(set(genotype_classes)):
+            raise ValueError("MultiGenotype can't contain duplicate Genotypes!")
+
         self.genotypes = genotypes
 
     def __str__(self):
