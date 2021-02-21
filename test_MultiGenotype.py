@@ -16,3 +16,11 @@ def test_3_genotypes():
 def test_wrong_args():
     with pytest.raises(ValueError):
         MultiGenotype(G('Cc'), 42)
+
+
+def test_equality_1():
+    assert MultiGenotype(G('ll'), G('Aa')) == MultiGenotype(G('ll'), G('Aa'))
+
+
+def test_equality_2():
+    assert MultiGenotype(G('bb'), G('cc')) != MultiGenotype(G('BB'), G('CC'))

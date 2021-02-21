@@ -63,6 +63,11 @@ class MultiGenotype:
     def __str__(self):
         return reduce(lambda g1, g2: str(g1) + str(g2), self.genotypes)
 
+    def __eq__(self, other):
+        if not isinstance(other, MultiGenotype):
+            return NotImplemented
+        return str(self) == str(other)
+
 
 def breed (genotype_a: Genotype, genotype_b: Genotype):
     if (
