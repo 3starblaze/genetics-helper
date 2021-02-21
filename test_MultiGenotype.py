@@ -45,3 +45,17 @@ def test_2_genotype_breeding_2():
         'ffcc', 'ffcc', 'ffCc', 'ffCc',
         'fFcc', 'fFcc', 'fFCc', 'fFCc',
     ]
+
+
+def test_incompatible_multi_genotypes():
+    mg1 = MultiGenotype(G('kK'), G('yY'))
+    mg2 = MultiGenotype(G('kk'), G('sS'))
+    with pytest.raises(ValueError):
+        mg1.breed(mg2)
+
+
+def test_misshapen_multi_genotypes():
+    mg1 = MultiGenotype(G('kK'), G('Ll'))
+    mg2 = MultiGenotype(G('kk'), G('ll'), G('cC'))
+    with pytest.raises(ValueError):
+        mg1.breed(mg2)
