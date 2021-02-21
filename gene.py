@@ -53,6 +53,21 @@ class Genotype:
         return self.gene_allele_a.value + self.gene_allele_b.value
 
 
+def breed (genotype_a: Genotype, genotype_b: Genotype):
+    if (
+        not isinstance(genotype_a, Genotype)
+        or not isinstance(genotype_a, Genotype)
+    ):
+        raise ValueError("Arguments must be objects of class Genotype!")
+
+    results = []
+    for allele_a in [genotype_a.gene_allele_a, genotype_a.gene_allele_b]:
+        for allele_b in [genotype_b.gene_allele_a, genotype_b.gene_allele_b]:
+            results.append(Genotype(allele_a, allele_b))
+
+    return results
+
+
 class MultiGenotype:
     def __init__(self, *genotypes: Sequence[Genotype]):
         for genotype in genotypes:
@@ -69,16 +84,32 @@ class MultiGenotype:
         return str(self) == str(other)
 
 
-def breed (genotype_a: Genotype, genotype_b: Genotype):
-    if (
-        not isinstance(genotype_a, Genotype)
-        or not isinstance(genotype_a, Genotype)
-    ):
-        raise ValueError("Arguments must be objects of class Genotype!")
+    def breed(self, other):
+        if not isinstance(other, MultiGenotype):
+            raise ValueError(
+                "MultiGenotype instance must be breeded with a MultiGenotype"
+                + "instance!"
+            )
+        if (
+            len(self.genotypes) != len(other.genotypes)
+            # Quick way to check if there's same gene type
+            or str(self).lower() != str(other).lower()
+        ):
+            raise ValueError("Genotype classes don't match!")
 
-    results = []
-    for allele_a in [genotype_a.gene_allele_a, genotype_a.gene_allele_b]:
-        for allele_b in [genotype_b.gene_allele_a, genotype_b.gene_allele_b]:
-            results.append(Genotype(allele_a, allele_b))
+        basic_breeds = []
+        for i in range(len(self.genotypes)):
+            g1 = self.genotypes[i]
+            g2 = other.genotypes[i]
+            basic_breeds.append([str(g) for g in breed(g1, g2)])
 
-    return results
+
+        def string_stitcher(l1: Sequence[str], l2: Sequence[str]):
+            res = []
+            for lhs in l1:
+                for rhs in l2:
+                    res.append(lhs + rhs)
+            return res
+
+
+        return reduce(string_stitcher, basic_breeds)
