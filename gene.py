@@ -102,19 +102,21 @@ def breed (genotype_a: Genotype, genotype_b: Genotype):
 
     return results
 #XY breeding thingie
+#Fixing shit CODE
 class XYGenotype:
-    def __init__(self,gene_allele_a):
-        self.chromosome_a = ["X", str(gene_allele_a)]
-        self.chromosome_b = ["Y", ""]
+    def __init__(self,gene_allele_a: GeneAllele):
+        self.gene_allele_a = gene_allele_a
+    def __str__(self):
+        return f"X^{self.gene_allele_a}Y"
 
 class XXGenotype:
-    def __init__(self,gene_allele_ab):
-        self.chromosome_a = ["X", str(gene_allele_ab[0])]
-        self.chromosome_b = ["X", str(gene_allele_ab[1])]
+    def __init__(self,gene_allele_a: GeneAllele, gene_allele_b:GeneAllele):
+        self.gene_allele_a = gene_allele_a
+        self.gene_allele_b = gene_allele_b
+    def __str__(self):
+        return f"X^{self.gene_allele_a}X^{self.gene_allele_b}"
 
-def gender_breed(female: XXGenotype, male: XYGenotype):
-    results = []
-    for Chromosome_A in [female.chromosome_a,female.chromosome_b]:
-        for Chromosome_B in [male.chromosome_a, male.chromosome_b]:
-            results.append(Chromosome_A[0]+Chromosome_A[1] + Chromosome_B[0]+Chromosome_B[1])
-    return results
+def gender_breed(gene_allele_a: Genotype, gene_allele_b):
+    breeding_results = []
+    for
+
