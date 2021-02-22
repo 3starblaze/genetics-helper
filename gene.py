@@ -71,15 +71,21 @@ class XYGenotype:
     def __init__(self, gene_allele_a: GeneAllele):
         self.gene_allele_a = gene_allele_a
         self.gene_allele_b = None
+
+
     def __str__(self):
         return f"X^{self.gene_allele_a}Y"
+
 
 class XXGenotype:
     def __init__(self, gene_allele_a: GeneAllele, gene_allele_b:GeneAllele):
         self.gene_allele_a = gene_allele_a
         self.gene_allele_b = gene_allele_b
+
+
     def __str__(self):
         return f"X^{self.gene_allele_a}X^{self.gene_allele_b}"
+
 
 def gender_breed(female: XXGenotype, male: XYGenotype):
     breeding_results = []
