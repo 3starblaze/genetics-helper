@@ -80,6 +80,13 @@ class XYGenotype:
 
 class XXGenotype:
     def __init__(self, gene_allele_a: GeneAllele, gene_allele_b:GeneAllele):
+        if (
+            not isinstance(gene_allele_a, GeneAllele)
+            or not isinstance(gene_allele_b, GeneAllele)
+        ):
+            raise ValueError(
+                "gene_allele_a and gene_allele_b must instance GeneAllele!"
+            )
         self.gene_allele_a = gene_allele_a
         self.gene_allele_b = gene_allele_b
 
