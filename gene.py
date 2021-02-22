@@ -65,8 +65,8 @@ def breed (genotype_a: Genotype, genotype_b: Genotype):
             results.append(Genotype(allele_a, allele_b))
 
     return results
-#XY breeding thingie
-#Fixing shit CODE
+
+
 class XYGenotype:
     def __init__(self, gene_allele_a: GeneAllele):
         self.gene_allele_a = gene_allele_a
