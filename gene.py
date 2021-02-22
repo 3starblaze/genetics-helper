@@ -106,6 +106,7 @@ def breed (genotype_a: Genotype, genotype_b: Genotype):
 class XYGenotype:
     def __init__(self,gene_allele_a: GeneAllele):
         self.gene_allele_a = gene_allele_a
+        self.gene_allele_b = None
     def __str__(self):
         return f"X^{self.gene_allele_a}Y"
 
@@ -116,7 +117,12 @@ class XXGenotype:
     def __str__(self):
         return f"X^{self.gene_allele_a}X^{self.gene_allele_b}"
 
-def gender_breed(gene_allele_a: Genotype, gene_allele_b):
+def gender_breed(female: XXGenotype, male: XYGenotype):
     breeding_results = []
-    for
-
+    for allele_a in [female.gene_allele_a, female.gene_allele_b]:
+        for allele_b in [male.gene_allele_a, male.gene_allele_b]:
+            if allele_b != None:
+                breeding_results.append(XXGenotype(allele_a,allele_b))
+            else:
+                breeding_results.append(XYGenotype(allele_a))
+    return breeding_results
