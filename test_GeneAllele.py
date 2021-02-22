@@ -5,8 +5,8 @@ from gene import GeneAllele
 
 
 def test_equality():
-    assert GeneAllele('J', '', '') == GeneAllele('J', '', '')
+    assert GeneAllele('J') == GeneAllele('J')
 
 
 def test_different_value_case_are_not_same():
-    assert GeneAllele('F', '', '') != GeneAllele('f', '', '')
+    assert GeneAllele('F') != GeneAllele('f')
