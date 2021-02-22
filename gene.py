@@ -104,14 +104,14 @@ def breed (genotype_a: Genotype, genotype_b: Genotype):
 #XY breeding thingie
 #Fixing shit CODE
 class XYGenotype:
-    def __init__(self,gene_allele_a: GeneAllele):
+    def __init__(self, gene_allele_a: GeneAllele):
         self.gene_allele_a = gene_allele_a
         self.gene_allele_b = None
     def __str__(self):
         return f"X^{self.gene_allele_a}Y"
 
 class XXGenotype:
-    def __init__(self,gene_allele_a: GeneAllele, gene_allele_b:GeneAllele):
+    def __init__(self, gene_allele_a: GeneAllele, gene_allele_b:GeneAllele):
         self.gene_allele_a = gene_allele_a
         self.gene_allele_b = gene_allele_b
     def __str__(self):
