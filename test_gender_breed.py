@@ -8,5 +8,5 @@ def test_gender_breeding_with_XX_XY_chromosome():
     male = XYGenotype(GeneAllele("A"))
     results = gender_breed(female,male)
     test_results = ["X^AX^A","X^AY","X^aX^A","X^aY"]
-    for i in range(len(results)):
-        assert str(results[i]) == test_results[i]
+    results = [str(g) for g in results]
+    assert results == test_results
