@@ -87,6 +87,12 @@ class XXGenotype:
             raise ValueError(
                 "gene_allele_a and gene_allele_b must instance GeneAllele!"
             )
+
+        if not is_same_gene_allele_type(gene_allele_a, gene_allele_b):
+            raise ValueError(
+                "gene_allele_a and gene_allele_b must be same class gene alleles!"
+            )
+
         self.gene_allele_a = gene_allele_a
         self.gene_allele_b = gene_allele_b
 
