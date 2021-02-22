@@ -69,6 +69,8 @@ def breed (genotype_a: Genotype, genotype_b: Genotype):
 
 class XYGenotype:
     def __init__(self, gene_allele: GeneAllele):
+        if not isinstance(gene_allele, GeneAllele):
+            raise ValueError("gene_allele must instance GeneAllele!")
         self.gene_allele = gene_allele
 
 
