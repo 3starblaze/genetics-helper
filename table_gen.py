@@ -31,9 +31,9 @@ def create_table(genotype_a: Genotype, genotype_b: Genotype):
 
 def create_multi_gene_table(MultiGenotype_a: MultiGenotype, MultiGenotype_b: MultiGenotype):
     document = Document()
-    rows_cols_ammount = len(MultiGenotype_a.genotypes) * len(MultiGenotype_b.genotypes)
+    rows_cols_amount = len(MultiGenotype_a.genotypes) * len(MultiGenotype_b.genotypes)
 
-    table = document.add_table(rows = (rows_cols_ammount + 1), cols = (rows_cols_ammount + 1))
+    table = document.add_table(rows = (rows_cols_amount + 1), cols = (rows_cols_amount + 1))
 
     def set_cell(row, col, val):
         table.rows[row].cells[col].text = val
@@ -43,16 +43,16 @@ def create_multi_gene_table(MultiGenotype_a: MultiGenotype, MultiGenotype_b: Mul
     genotype_a_variantions = breed(MultiGenotype_a.genotypes[0], MultiGenotype_a.genotypes[1])
     genotype_b_variantions = breed(MultiGenotype_b.genotypes[0], MultiGenotype_b.genotypes[1])
 
-    for i in range(rows_cols_ammount):
+    for i in range(rows_cols_amount):
         set_cell(i + 1, 0, str(genotype_a_variantions[i]))
-    for i in range(rows_cols_ammount):
+    for i in range(rows_cols_amount):
         set_cell(0, i + 1, str(genotype_b_variantions[i]))
 
     multi_genotype_breeding_results = MultiGenotype_a.breed(MultiGenotype_b)
     element_counter = 0
 
-    for rows in range(rows_cols_ammount):
-        for colums in range(rows_cols_ammount):
+    for rows in range(rows_cols_amount):
+        for colums in range(rows_cols_amount):
             set_cell(rows + 1, colums + 1, multi_genotype_breeding_results[element_counter])
             element_counter += 1
 
