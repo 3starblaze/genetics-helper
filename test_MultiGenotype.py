@@ -35,20 +35,20 @@ def test_2_genotype_breeding_1():
     mg1 = MultiGenotype(G('Aa'), G('Bb'))
     mg2 = MultiGenotype(G('Aa'), G('Bb'))
     assert mg1.breed(mg2) == [
-        'AABB', 'AABb', 'AAbB', 'AAbb',
-        'AaBB', 'AaBb', 'AabB', 'Aabb',
-        'aABB', 'aABb', 'aAbB', 'aAbb',
-        'aaBB', 'aaBb', 'aabB', 'aabb',
+        'AABB', 'AABb', 'AaBB', 'AaBb',
+        'AAbB', 'AAbb', 'AabB', 'Aabb',
+        'aABB', 'aABb', 'aaBB', 'aaBb',
+        'aAbB', 'aAbb', 'aabB', 'aabb'
     ]
 
 def test_2_genotype_breeding_2():
     mg1 = MultiGenotype(G('ff'), G('cC'))
     mg2 = MultiGenotype(G('fF'), G('cc'))
     assert mg1.breed(mg2) == [
-        'ffcc', 'ffcc', 'ffCc', 'ffCc',
-        'fFcc', 'fFcc', 'fFCc', 'fFCc',
-        'ffcc', 'ffcc', 'ffCc', 'ffCc',
-        'fFcc', 'fFcc', 'fFCc', 'fFCc',
+        'ffcc', 'ffcc', 'fFcc', 'fFcc',
+        'ffCc', 'ffCc', 'fFCc', 'fFCc',
+        'ffcc', 'ffcc', 'fFcc', 'fFcc',
+        'ffCc', 'ffCc', 'fFCc', 'fFCc',
     ]
 
 

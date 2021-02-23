@@ -2,6 +2,7 @@
 
 from typing import Optional, Sequence
 from functools import reduce
+from itertools import product, chain
 
 
 def is_legal_gene_allele(gene):
@@ -106,18 +107,15 @@ class MultiGenotype:
             raise ValueError("Genotype classes don't match!")
 
         basic_breeds = []
-        for i in range(len(self.genotypes)):
-            g1 = self.genotypes[i]
-            g2 = other.genotypes[i]
-            basic_breeds.append([str(g) for g in breed(g1, g2)])
 
+        f_half_genotype = [
+            "".join(chars) for chars in product(*[str(g) for g in self.genotypes])
+        ]
+        m_half_genotype = [
+            "".join(chars) for chars in product(*[str(g) for g in other.genotypes])
+        ]
 
-        def string_stitcher(l1: Sequence[str], l2: Sequence[str]):
-            res = []
-            for lhs in l1:
-                for rhs in l2:
-                    res.append(lhs + rhs)
-            return res
-
-
-        return reduce(string_stitcher, basic_breeds)
+        return [
+            "".join(chain.from_iterable(x)) for x in
+            [list(zip(*x)) for x in product(f_half_genotype, m_half_genotype)]
+        ]
