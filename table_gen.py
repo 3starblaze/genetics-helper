@@ -38,11 +38,11 @@ def create_multi_gene_table(MultiGenotype_a: MultiGenotype, MultiGenotype_b: Mul
     set_cell(0, 0, "♀ \ ♂")
 
     for i in range(len(MultiGenotype_a.genotypes)):
-        set_cell(i + 1, 0, str(MultiGenotype_a.genotypes[i]))
+        set_cell(i + 1, 0, str(MultiGenotype_a.genotypes)[i])
     for i in range(len(MultiGenotype_b.genotypes)):
-        set_cell(0, i + 1, str(MultiGenotype_b.genotypes[i]))
+        set_cell(0, i + 1, str(MultiGenotype_b.genotypes)[i])
 
-    multi_genotype_breeding_results = [MultiGenotype_a.breed(MultiGenotype_b)]
+    multi_genotype_breeding_results = MultiGenotype_a.breed(MultiGenotype_b)
     element_counter = 0
 
     for rows in range(len(MultiGenotype_a.genotypes)):
