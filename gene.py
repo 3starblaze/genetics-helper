@@ -106,8 +106,6 @@ class MultiGenotype:
         ):
             raise ValueError("Genotype classes don't match!")
 
-        basic_breeds = []
-
         f_half_genotype = [
             "".join(chars) for chars in product(*[str(g) for g in self.genotypes])
         ]
