@@ -38,19 +38,22 @@ def create_multi_gene_table(MultiGenotype_a: MultiGenotype, MultiGenotype_b: Mul
     def set_cell(row, col, val):
         table.rows[row].cells[col].text = val
 
-    set_cell(0, 0, "♀ \ ♂")
 
-    genotype_a_variantions = breed(MultiGenotype_a.genotypes[0], MultiGenotype_a.genotypes[1])
-    genotype_b_variantions = breed(MultiGenotype_b.genotypes[0], MultiGenotype_b.genotypes[1])
-
-    for i in range(rows_cols_amount):
-        set_cell(i + 1, 0, str(genotype_a_variantions[i]))
-    for i in range(rows_cols_amount):
-        set_cell(0, i + 1, str(genotype_b_variantions[i]))
 
     multi_genotype_breeding_results = MultiGenotype_a.breed(MultiGenotype_b)
     element_counter = 0
 
+    set_cell(0, 0, "♀ \ ♂")
+
+    # fill left colum
+    for i in range(rows_cols_amount):
+        set_cell(i + 1, 0, multi_genotype_breeding_results[1 + i * rows_cols_amount][:2])
+
+    # fill top row
+    for i in range(rows_cols_amount):
+        set_cell(0, i + 1, multi_genotype_breeding_results[i][2:])
+
+    # fill table elements
     for rows in range(rows_cols_amount):
         for colums in range(rows_cols_amount):
             set_cell(rows + 1, colums + 1, multi_genotype_breeding_results[element_counter])
