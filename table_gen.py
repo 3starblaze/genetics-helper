@@ -30,42 +30,35 @@ def create_table(genotype_a: Genotype, genotype_b: Genotype):
 
     document.save('sample.docx')
 
-def create_multi_gene_table(MultiGenotype_a: MultiGenotype, MultiGenotype_b: MultiGenotype):
+def create_multi_gene_table(mg_a: MultiGenotype, mg_b: MultiGenotype):
     document = Document()
-    rows_cols_amount = len(MultiGenotype_a.genotypes) * len(MultiGenotype_b.genotypes)
+    square_size = len(mg_a.genotypes) * len(mg_b.genotypes)
 
-    table = document.add_table(rows = (rows_cols_amount + 1), cols = (rows_cols_amount + 1))
+    table = document.add_table(rows = square_size + 1, cols = square_size + 1)
 
     def set_cell(row, col, val):
         table.rows[row].cells[col].text = val
 
-    mg_a = MultiGenotype_a
-    mg_b = MultiGenotype_b
+    multi_genotype_breeding_results = mg_a.breed(mg_b)
 
-    multi_genotype_breeding_results = MultiGenotype_a.breed(MultiGenotype_b)
     genotype_variations_a_temp = list(product(*[str(g) for g in mg_a.genotypes]))
     genotype_variations_b_temp = list(product(*[str(g) for g in mg_b.genotypes]))
 
     genotype_variations_a = ["".join(x) for x in genotype_variations_a_temp]
     genotype_variations_b = ["".join(x) for x in genotype_variations_b_temp]
 
-    element_counter = 0
-
-
-
     set_cell(0, 0, "♀ \ ♂")
 
-    for i in range(rows_cols_amount):
-         set_cell(i + 1, 0, genotype_variations_a[i])
+    for i, genotype in enumerate(genotype_variations_a):
+         set_cell(i + 1, 0, genotype)
 
-    for i in range(rows_cols_amount):
-        set_cell(0, i + 1, genotype_variations_b[i])
+    for i, genotype in enumerate(genotype_variations_b):
+        set_cell(0, i + 1, genotype)
 
-    for rows in range(rows_cols_amount):
-        for colums in range(rows_cols_amount):
-            set_cell(rows + 1, colums + 1, multi_genotype_breeding_results[element_counter])
+    element_counter = 0
+    for row in range(square_size):
+        for column in range(square_size):
+            set_cell(row + 1, column + 1, multi_genotype_breeding_results[element_counter])
             element_counter += 1
-    assert multi_genotype_breeding_results[12] == "aaBB"
-    try: document.save('mgene_sample_1.docx')
-    except: document.save('mgene_sample_2.docx')
 
+    document.save('mgene_sample.docx')
