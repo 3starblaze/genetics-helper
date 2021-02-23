@@ -32,14 +32,15 @@ def create_table(genotype_a: Genotype, genotype_b: Genotype):
 
 def create_multi_gene_table(mg_a: MultiGenotype, mg_b: MultiGenotype):
     document = Document()
-    square_size = len(MultiGenotype_a.genotypes) * len(MultiGenotype_b.genotypes)
+    square_size = len(mg_a.genotypes) * len(mg_b.genotypes)
 
     table = document.add_table(rows = square_size + 1, cols = square_size + 1)
 
     def set_cell(row, col, val):
         table.rows[row].cells[col].text = val
 
-    multi_genotype_breeding_results = MultiGenotype_a.breed(MultiGenotype_b)
+    multi_genotype_breeding_results = mg_a.breed(mg_b)
+
     genotype_variations_a_temp = list(product(*[str(g) for g in mg_a.genotypes]))
     genotype_variations_b_temp = list(product(*[str(g) for g in mg_b.genotypes]))
 
@@ -48,15 +49,15 @@ def create_multi_gene_table(mg_a: MultiGenotype, mg_b: MultiGenotype):
 
     set_cell(0, 0, "♀ \ ♂")
 
-    for i in range(square_size):
-         set_cell(i + 1, 0, genotype_variations_a[i])
+    for i, genotype in enumerate(genotype_variations_a):
+         set_cell(i + 1, 0, genotype)
 
-    for i in range(square_size):
-        set_cell(0, i + 1, genotype_variations_b[i])
+    for i, genotype in enumerate(genotype_variations_b):
+        set_cell(0, i + 1, genotype)
 
     element_counter = 0
     for row in range(square_size):
-        for column in range(rows_cols_amount):
+        for column in range(square_size):
             set_cell(row + 1, column + 1, multi_genotype_breeding_results[element_counter])
             element_counter += 1
 
