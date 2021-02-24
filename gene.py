@@ -117,3 +117,46 @@ class MultiGenotype:
             "".join(chain.from_iterable(x)) for x in
             [list(zip(*x)) for x in product(f_half_genotype, m_half_genotype)]
         ]
+
+
+class XYGenotype:
+    def __init__(self, gene_allele: GeneAllele):
+        if not isinstance(gene_allele, GeneAllele):
+            raise ValueError("gene_allele must instance GeneAllele!")
+        self.gene_allele = gene_allele
+
+
+    def __str__(self):
+        return f"X^{self.gene_allele.value}Y"
+
+
+class XXGenotype:
+    def __init__(self, gene_allele_a: GeneAllele, gene_allele_b:GeneAllele):
+        if (
+            not isinstance(gene_allele_a, GeneAllele)
+            or not isinstance(gene_allele_b, GeneAllele)
+        ):
+            raise ValueError(
+                "gene_allele_a and gene_allele_b must instance GeneAllele!"
+            )
+
+        if not is_same_gene_allele_type(gene_allele_a, gene_allele_b):
+            raise ValueError(
+                "gene_allele_a and gene_allele_b must be same class gene alleles!"
+            )
+
+        self.gene_allele_a = gene_allele_a
+        self.gene_allele_b = gene_allele_b
+
+
+    def __str__(self):
+        return f"X^{self.gene_allele_a.value}X^{self.gene_allele_b.value}"
+
+
+def gender_breed(female: XXGenotype, male: XYGenotype):
+    return [
+        XXGenotype(female.gene_allele_a, male.gene_allele),
+        XYGenotype(female.gene_allele_a),
+        XXGenotype(female.gene_allele_b, male.gene_allele),
+        XYGenotype(female.gene_allele_b),
+    ]
