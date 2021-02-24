@@ -11,6 +11,9 @@ from itertools import *
 
 def create_table(genotype_a: Genotype, genotype_b: Genotype):
     document = Document()
+
+    document.add_paragraph(f"P ♀ {str(genotype_a)} x ♂ {str(genotype_b)}")
+
     table = document.add_table(rows = 3, cols = 3)
 
     def set_cell(row, col, val):
@@ -34,6 +37,16 @@ def create_table(genotype_a: Genotype, genotype_b: Genotype):
 
 def create_multi_gene_table(mg_a: MultiGenotype, mg_b: MultiGenotype):
     document = Document()
+
+    f_multi_genotype_temp = []
+    m_multi_genotype_temp = []
+    for i in range(len(mg_a.genotypes)):
+        f_multi_genotype_temp.append(str(mg_a.genotypes[i]))
+        m_multi_genotype_temp.append(str(mg_a.genotypes[i]))
+    f_multi_genotypes = "".join(f_multi_genotype_temp)
+    m_multi_genotypes = "".join(m_multi_genotype_temp)
+    document.add_paragraph(f"P ♀ {f_multi_genotypes} x ♂ {m_multi_genotypes}")
+
     square_size = len(mg_a.genotypes) * len(mg_b.genotypes)
 
     table = document.add_table(rows = square_size + 1, cols = square_size + 1)
@@ -67,6 +80,9 @@ def create_multi_gene_table(mg_a: MultiGenotype, mg_b: MultiGenotype):
 
 def create_gender_table(female: XXGenotype, male: XYGenotype):
     document = Document()
+
+    document.add_paragraph(f"P ♀ {str(female)} x ♂ {str(male)}")
+
     table = document.add_table(rows = 3, cols = 3)
 
     def set_cell(row, col, normal_value, superscript_value=None):
