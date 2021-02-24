@@ -38,14 +38,7 @@ def create_table(genotype_a: Genotype, genotype_b: Genotype):
 def create_multi_gene_table(mg_a: MultiGenotype, mg_b: MultiGenotype):
     document = Document()
 
-    f_multi_genotype_temp = []
-    m_multi_genotype_temp = []
-    for i in range(len(mg_a.genotypes)):
-        f_multi_genotype_temp.append(str(mg_a.genotypes[i]))
-        m_multi_genotype_temp.append(str(mg_a.genotypes[i]))
-    f_multi_genotypes = "".join(f_multi_genotype_temp)
-    m_multi_genotypes = "".join(m_multi_genotype_temp)
-    document.add_paragraph(f"P ♀ {f_multi_genotypes} x ♂ {m_multi_genotypes}")
+    document.add_paragraph(f"P ♀ {str(mg_a)} x ♂ {str(mg_b)}")
 
     square_size = len(mg_a.genotypes) * len(mg_b.genotypes)
 
