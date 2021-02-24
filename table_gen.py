@@ -1,8 +1,13 @@
 #!/usr/bin/env python3
 
 from docx import Document
-from gene import Genotype, GeneAllele, breed, XXGenotype, XYGenotype, gender_breed
-
+from gene import (
+    Genotype, GeneAllele, breed, MultiGenotype,
+    XXGenotype, XYGenotype, gender_breed
+)
+from typing import Sequence
+from gene_convenience import create_genotype as g
+from itertools import *
 
 def create_table(genotype_a: Genotype, genotype_b: Genotype):
     document = Document()
@@ -27,6 +32,38 @@ def create_table(genotype_a: Genotype, genotype_b: Genotype):
 
     document.save('sample.docx')
 
+def create_multi_gene_table(mg_a: MultiGenotype, mg_b: MultiGenotype):
+    document = Document()
+    square_size = len(mg_a.genotypes) * len(mg_b.genotypes)
+
+    table = document.add_table(rows = square_size + 1, cols = square_size + 1)
+
+    def set_cell(row, col, val):
+        table.rows[row].cells[col].text = val
+
+    multi_genotype_breeding_results = mg_a.breed(mg_b)
+
+    genotype_variations_a_temp = list(product(*[str(g) for g in mg_a.genotypes]))
+    genotype_variations_b_temp = list(product(*[str(g) for g in mg_b.genotypes]))
+
+    genotype_variations_a = ["".join(x) for x in genotype_variations_a_temp]
+    genotype_variations_b = ["".join(x) for x in genotype_variations_b_temp]
+
+    set_cell(0, 0, "♀ \ ♂")
+
+    for i, genotype in enumerate(genotype_variations_a):
+         set_cell(i + 1, 0, genotype)
+
+    for i, genotype in enumerate(genotype_variations_b):
+        set_cell(0, i + 1, genotype)
+
+    element_counter = 0
+    for row in range(square_size):
+        for column in range(square_size):
+            set_cell(row + 1, column + 1, multi_genotype_breeding_results[element_counter])
+            element_counter += 1
+
+    document.save('mgene_sample.docx')
 
 def create_gender_table(female: XXGenotype, male: XYGenotype):
     document = Document()
