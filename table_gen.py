@@ -74,7 +74,14 @@ def create_multi_gene_table(mg_a: MultiGenotype, mg_b: MultiGenotype):
 def create_gender_table(female: XXGenotype, male: XYGenotype):
     document = Document()
 
-    document.add_paragraph(f"P ♀ {str(female)} x ♂ {str(male)}")
+    p = document.add_paragraph()
+    p.add_run("P ♀ X")
+    p.add_run(f"{ female.gene_allele_a.value } ").font.superscript = True
+    p.add_run("X").font.superscript = False
+    p.add_run(f"{ female.gene_allele_b.value }").font.superscript = True
+    p.add_run(" x ♂ X").font_superscript = False
+    p.add_run(f"{ male.gene_allele.value } ").font.superscript = True
+    p.add_run("Y")
 
     table = document.add_table(rows = 3, cols = 3)
 
