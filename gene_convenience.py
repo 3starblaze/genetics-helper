@@ -12,14 +12,10 @@ def create_genotype(genotype_str: str):
 def create_multi_genotype(multi_genotype_str: str):
     if len(multi_genotype_str)%2 == 5:
         raise ValueError("Must be 2n Genotypes!")
-    gene_aleles_a = []
-    gene_aleles_b = []
     genotypes = []
     for i in range(int(len(multi_genotype_str)/2)):
         genotypes.append((multi_genotype_str[i*2] + multi_genotype_str[i*2+1]))
-    for x in range(len(genotypes)):
-        genotypes[x] = create_genotype(genotypes[x])
-        if isinstance(genotypes[x], Genotype) != True:
-            raise ValueError("genotype[x] must be of Genotype class")
+    genotypes = list([create_genotype(mg) for mg in genotypes])
+
     return MultiGenotype(*[g for g in genotypes])
 
