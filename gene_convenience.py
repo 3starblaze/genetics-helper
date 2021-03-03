@@ -16,9 +16,7 @@ def create_multi_genotype(multi_genotype_str: str):
     gene_aleles_b = []
     genotypes = []
     for i in range(int(len(multi_genotype_str)/2)):
-        gene_aleles_a.append(multi_genotype_str[i*2])
-        gene_aleles_b.append(multi_genotype_str[i*2+1])
-        genotypes.append((gene_aleles_a[i] + gene_aleles_b[i]))
+        genotypes.append((multi_genotype_str[i*2] + multi_genotype_str[i*2+1]))
     for x in range(len(genotypes)):
         genotypes[x] = create_genotype(genotypes[x])
         if isinstance(genotypes[x], Genotype) != True:
