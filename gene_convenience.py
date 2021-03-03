@@ -19,10 +19,9 @@ def create_multi_genotype(multi_genotype_str: str):
     for i in range(int(len(multi_genotype_str)/2)):
         gene_aleles_a.append(multi_genotype_str[i*2])
         gene_aleles_b.append(multi_genotype_str[i*2+1])
+        genotypes.append((gene_aleles_a[i] + gene_aleles_b[i]))
+    for x in range(len(genotypes)):
+        genotypes[x] = create_genotype(genotypes[x])
 
-    if len(gene_aleles_a) != len(gene_aleles_b):
-        raise ValueError("Something went very wrong!")
 
-    for i in range(len(gene_aleles_a)):
-        genotypes.append(Genotype(GeneAllele(gene_aleles_a[i]),GeneAllele(gene_aleles_b[i])))
-    return MultiGenotype(list(genotypes))
+    return MultiGenotype(genotypes)
