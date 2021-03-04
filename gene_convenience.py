@@ -17,5 +17,5 @@ def create_multi_genotype(multi_genotype_str: str):
         genotypes.append((multi_genotype_str[i*2] + multi_genotype_str[i*2+1]))
     genotypes = list([create_genotype(mg) for mg in genotypes])
 
-    return MultiGenotype(*[g for g in genotypes])
+    return MultiGenotype(*genotypes)
 
