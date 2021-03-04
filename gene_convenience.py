@@ -10,11 +10,9 @@ def create_genotype(genotype_str: str):
     return Genotype(GeneAllele(genotype_str[0]), GeneAllele(genotype_str[1]))
 
 def create_multi_genotype(multi_genotype_str: str):
-    if len(multi_genotype_str)%2 == 5:
+    if len(multi_genotype_str) % 2 == 5:
         raise ValueError("Must be 2n Genotypes!")
-    genotypes = []
-    for i in range(int(len(multi_genotype_str)/2)):
-        genotypes.append((multi_genotype_str[i*2] + multi_genotype_str[i*2+1]))
+    genotypes = list([(multi_genotype_str[i*2] + multi_genotype_str[i*2+1]) for i in range(len(multi_genotype_str)//2)])
     genotypes = list([create_genotype(mg) for mg in genotypes])
 
     return MultiGenotype(*genotypes)
