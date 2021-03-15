@@ -20,6 +20,9 @@ class Document:
 
 
     def create_table(self, genotype_a: Genotype, genotype_b: Genotype):
+        self.document_object.add_paragraph(
+            f"P ♀ {str(genotype_a)} x ♂ {str(genotype_b)}"
+        )
         table = self.document_object.add_table(rows = 3, cols = 3)
 
         def set_cell(row, col, val):
@@ -43,6 +46,7 @@ class Document:
 
 
     def create_multi_gene_table(self, mg_a: MultiGenotype, mg_b: MultiGenotype):
+        self.document_object.add_paragraph(f"P ♀ {str(mg_a)} x ♂ {str(mg_b)}")
         square_size = len(mg_a.genotypes) * len(mg_b.genotypes)
 
         table = self.document_object.add_table(
@@ -78,6 +82,15 @@ class Document:
 
 
     def create_gender_table(self, female: XXGenotype, male: XYGenotype):
+        p = self.document_object.add_paragraph()
+        p.add_run("P ♀ X")
+        p.add_run(f"{ female.gene_allele_a.value } ").font.superscript = True
+        p.add_run("X").font.superscript = False
+        p.add_run(f"{ female.gene_allele_b.value }").font.superscript = True
+        p.add_run(" x ♂ X").font_superscript = False
+        p.add_run(f"{ male.gene_allele.value } ").font.superscript = True
+        p.add_run("Y")
+
         table = self.document_object.add_table(rows = 3, cols = 3)
 
         def set_cell(row, col, normal_value, superscript_value=None):
