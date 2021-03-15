@@ -6,6 +6,6 @@ from table_gen import create_table, create_gender_table
 
 # create_table(G('Aa'), G('Aa'))
 create_gender_table(
-    XXGenotype(GeneAllele('A'), GeneAllele('a')),
-    XYGenotype(GeneAllele('a'))
+    XXGenotype(GeneAllele('t'), GeneAllele('d')),
+    XYGenotype(GeneAllele('t'))
 )
