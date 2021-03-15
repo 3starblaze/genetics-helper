@@ -2,7 +2,7 @@
 
 ## Usage
 
-Call `table_gen()` with 2 genotypes and see the output in `sample.docx`. An example can be seen in `sample.py`.
+Import `Document` from `table_gen`, initialize it and call table creating functions on it. See the example in `sample.py`.
 
 ## Dependencies
 
