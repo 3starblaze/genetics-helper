@@ -7,5 +7,6 @@ Import `Document` from `table_gen`, initialize it and call table creating functi
 ## Dependencies
 
 - `python-docx` for generating documents.
+- `PySimpleGUI` for GUI interface (optional if there is no need for GUI)
 - `pytest` for testing (dev-dependency)
 
