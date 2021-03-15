@@ -13,11 +13,19 @@ layout = [
 
 window = sg.Window('Genotype maker', layout)
 
-event, values = window.read()
-window.close()
+while True:
+    event, values = window.read()
+    if event == sg.WIN_CLOSED:
+        break
 
-if not values['save_folder']:
-    print('Value must be specified!')
-else:
-    save_location = Path(values['save_folder']) / 'foo'
-    save_location.touch(exist_ok=False)
+    if event == 'Submit':
+        if not values['save_folder'] or values['save_folder'] == ' ':
+            sg.popup_error('Value must be specified!')
+        else:
+            try:
+                save_location = Path(values['save_folder']) / 'foo'
+                save_location.touch(exist_ok=False)
+            except Exception as e:
+                sg.popup_error(e)
+
+window.close()
