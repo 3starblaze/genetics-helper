@@ -22,7 +22,3 @@ def test_xx_genotype_wrong_arg_type():
     with pytest.raises(ValueError):
         XXGenotype(GeneAllele('c'), 39)
 
-
-def test_xx_genotype_mismatched_gene_alleles():
-    with pytest.raises(ValueError):
-        XXGenotype(GeneAllele('k'), GeneAllele('l'))
