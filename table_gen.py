@@ -6,9 +6,8 @@ from gene import (
     XXGenotype, XYGenotype, gender_breed
 )
 from typing import Sequence
+from itertools import product
 from gene_convenience import create_genotype as g
-from itertools import *
-
 
 class Document:
     def __init__(self):
