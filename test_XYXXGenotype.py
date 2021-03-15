@@ -22,3 +22,10 @@ def test_xx_genotype_wrong_arg_type():
     with pytest.raises(ValueError):
         XXGenotype(GeneAllele('c'), 39)
 
+def test_xx_genotype_correct_values_test():
+    xx = XXGenotype(GeneAllele("A"), GeneAllele("C"))
+    assert str(xx) == "X^AX^C"
+    
+def test_xx_genotype_diff_alleles():
+    with pytest.raises(ValueError):
+        XXGenotype(GeneAllele("A"), GeneAllele("B"))
